@@ -25,9 +25,9 @@ php-sms-sdk
 
     include_once("../SDK/SmsSDK.php");
     /**
-    to 手机号码集合,用英文逗号分开
+    to 手机号码集合,用英文逗号分开,如'15813110281,18513110281',最多一次发送200个
     datas 内容数据 格式为数组 例如：array('Marry','Alon')，如不需替换请填 null
-    $tempId 模板Id
+    $tempId 模板Id，如使用测试模板，模板id为1，如使用自己创建的模板，则使用自己创建d的短信模板id即可。
     /*
     function sendTemplateSMS($to, $datas, $tempId){
     //主帐号
@@ -43,7 +43,6 @@ php-sms-sdk
     //REST版本号 默认为：2013-12-26
     $softVersion = '';
     // 初始化REST SDK
-    //global $accountSid, $accountToken, $appId, $serverIP, $serverPort, $softVersion;
     $rest = new REST($serverIP, $serverPort, $softVersion);
     $rest->setAccount($accountSid, $accountToken);
     $rest->setAppId($appId);
@@ -72,6 +71,6 @@ php-sms-sdk
 ## 使用说明
     * 自定义配置及默认
       $BodyType = "xml";//包体格式，可填值：json 、xml
-      $enabeLog = true; //日志开关。可填值：true、
+      $enabeLog = true; //日志开关。可填值：true、false
       $Filename = "../log.txt"; //日志文件
 
