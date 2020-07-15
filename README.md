@@ -28,7 +28,7 @@ php-sms-sdk
     to 手机号码集合,用英文逗号分开,如'15813110281,18513110281',最多一次发送200个
     datas 内容数据 格式为数组 例如：array('Marry','Alon')，如不需替换请填 null
     $tempId 模板Id，如使用测试模板，模板id为1，如使用自己创建的模板，则使用自己创建d的短信模板id即可。
-    /*
+    */
     function sendTemplateSMS($to, $datas, $tempId){
     //主帐号
     $accountSid = 'xxxxx';
