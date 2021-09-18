@@ -14,53 +14,50 @@
 
 include_once("../SDK/SmsSDK.php");
 
-
 /**
  * 发送模板短信
- * @param to 手机号码集合,用英文逗号分开
- * @param datas 内容数据 格式为数组 例如：array('Marry','Alon')，如不需替换请填 null
- * @param $tempId 模板Id
+ * @param int|string $to 短信接收彿手机号码集合,用英文逗号分开
+ * @param array $dataAry 内容数据
+ * @param int|string $templateId 模板Id
  */
-function sendTemplateSMS($to, $datas, $tempId)
+function sendTemplateSMS($to, $dataAry, $templateId)
 {
-    //主帐号
+    // 主帐号
     $accountSid = '';
-    //主帐号Token
+    // 主帐号Token
     $accountToken = '';
-    //应用Id
+    // 应用Id
     $appId = '';
-    //请求地址，格式如下，不需要写https://
-    $serverIP = 'app.cloopen.com';
-    //请求端口
+    // 请求地址，格式如下，不需要写https://
+    $serverHost = 'app.cloopen.com';
+    // 请求端口
     $serverPort = '8883';
-    //REST版本号
-    $softVersion = '2013-12-26';
+    // REST版本号
+    $apiVersion = '2013-12-26';
+
     // 初始化REST SDK
-    $rest = new REST($serverIP, $serverPort, $softVersion);
+    $rest = new REST($serverHost, $serverPort, $apiVersion);
     $rest->setAccount($accountSid, $accountToken);
     $rest->setAppId($appId);
 
     // 发送模板短信
-    echo "Sending TemplateSMS to $to <br/>";
-    $result = $rest->sendTemplateSMS($to, $datas, $tempId);
+    echo "Sending TemplateSMS to {$to} <br/>";
+    $result = $rest->sendTemplateSMS($to, $dataAry, $templateId);
     if ($result == NULL) {
-        echo "result error!";
-        break;
+        echo "result error!<br>";
     }
     if ($result->statusCode != 0) {
-        echo "error code :" . $result->statusCode . "<br>";
-        echo "error msg :" . $result->statusMsg . "<br>";
-        //TODO 添加错误处理逻辑
+        echo "error code: {$result->statusCode}<br>; error msg: {$result->statusMsg}<br>";
+        // TODO 添加错误处理逻辑
     } else {
         echo "Sendind TemplateSMS success!<br/>";
         // 获取返回信息
-        $smsmessage = $result->TemplateSMS;
-        echo "dateCreated:" . $smsmessage->dateCreated . "<br/>";
-        echo "smsMessageSid:" . $smsmessage->smsMessageSid . "<br/>";
-        //TODO 添加成功处理逻辑
+        $resMsg = $result->TemplateSMS;
+        echo "dateCreated: {$resMsg->dateCreated}<br/>; smsMessageSid: {$resMsg->smsMessageSid}<br/>";
+        // TODO 添加成功处理逻辑
     }
 }
 
-//Demo调用,参数填入正确后，放开注释可以调用 
-//sendTemplateSMS("手机号码","内容数据","模板Id");
+// Demo调用,参数填入正确后，放开注释可以调用
+// sendTemplateSMS("手机号码","内容数据","模板Id");
 ?>
