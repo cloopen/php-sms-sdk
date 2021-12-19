@@ -52,7 +52,7 @@ php-sms-sdk
     $result = $rest->sendTemplateSMS($to, $datas, $tempId);
     if ($result == NULL) {
         echo "result error!";
-        break;
+        return;
     }
     if ($result->statusCode != 0) {
         echo "error code :" . $result->statusCode . "<br>";
